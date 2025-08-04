@@ -1,19 +1,17 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from datetime import datetime
-from django.template.loader import render_to_string
 
-def home(request=None):
+def home(request):
     context = {
         'title': 'Accueil',
         'message': 'Bienvenue sur ma WebApp Django !',
         'current_time': datetime.now().strftime('%H:%M:%S'),
         'current_date': datetime.now().strftime('%d/%m/%Y'),
     }
-    html = render_to_string('myapp/home.html', context)
-    return HttpResponse(html)
+    return render(request, 'myapp/home.html', context)
 
-def about(request=None):
+def about(request):
     context = {
         'title': 'À propos',
         'description': 'Cette application a été créée avec Django pour démontrer une webApp légère.',
@@ -24,15 +22,13 @@ def about(request=None):
             'Templates Django',
         ]
     }
-    html = render_to_string('myapp/about.html', context)
-    return HttpResponse(html)
+    return render(request, 'myapp/about.html', context)
 
-def contact(request=None):
+def contact(request):
     context = {
         'title': 'Contact',
         'email': 'contact@example.com',
         'phone': '+33 1 23 45 67 89',
         'address': '123 Rue de la Paix, 75001 Paris'
     }
-    html = render_to_string('myapp/contact.html', context)
-    return HttpResponse(html)
+    return render(request, 'myapp/contact.html', context)

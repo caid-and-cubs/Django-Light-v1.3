@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: django-light-app
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn myproject.wsgi:application"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.9.16
+      - key: DEBUG
+        value: False
+      - key: RENDER
+        value: True 

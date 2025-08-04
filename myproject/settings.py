@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-c=lso(we4g4vm=m7+m8+mnsuf*f6-1!el2#qx1#*z3ae_hi)1o'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['*', '.vercel.app']
+ALLOWED_HOSTS = ['*', '.render.com', '.onrender.com']
 
 
 # Application definition
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -75,11 +76,12 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# Configuration pour Vercel (pas de base de données persistante)
+# Configuration pour Render.com
+import os
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': ':memory:',  # Base de données en mémoire pour Vercel
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -120,20 +122,15 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Configuration pour Vercel
-import os
-if os.environ.get('VERCEL'):
-    # Désactiver les migrations automatiques sur Vercel
-    MIGRATION_MODULES = {
-        'django.contrib.auth': None,
-        'django.contrib.contenttypes': None,
-        'django.contrib.sessions': None,
-        'django.contrib.messages': None,
-        'django.contrib.staticfiles': None,
-    }
+# Configuration pour Render.com
+if os.environ.get('RENDER'):
+    # Configuration spécifique pour Render
+    SECURE_SSL_REDIRECT = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
