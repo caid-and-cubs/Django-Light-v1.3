@@ -61,6 +61,7 @@ python manage.py runserver
 ## 🌐 Accès
 
 Une fois déployé, votre application sera accessible à l'adresse fournie par Railway.com.
+https://web-production-6ec3.up.railway.app/
 
 ## 📝 Notes
 
