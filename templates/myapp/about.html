@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }} - WebApp Django{% endblock %}
+
+{% block content %}
+<div class="content">
+    <h1>{{ title }}</h1>
+    
+    <div class="card">
+        <h2>📋 Description</h2>
+        <p>{{ description }}</p>
+    </div>
+
+    <div class="card">
+        <h2>✨ Fonctionnalités principales</h2>
+        <ul class="feature-list">
+            {% for feature in features %}
+            <li>{{ feature }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="grid">
+        <div class="card">
+            <h2>🎯 Objectifs</h2>
+            <p>Cette application a été conçue pour :</p>
+            <ul class="feature-list">
+                <li>Démontrer les capacités de Django</li>
+                <li>Fournir une base solide pour des projets web</li>
+                <li>Offrir une expérience utilisateur moderne</li>
+                <li>Faciliter l'apprentissage du framework</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>🔧 Architecture</h2>
+            <p>Structure du projet :</p>
+            <ul class="feature-list">
+                <li>Modèle-Vue-Contrôleur (MVC)</li>
+                <li>Templates Django avec héritage</li>
+                <li>Système de routage flexible</li>
+                <li>Base de données SQLite intégrée</li>
+            </ul>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 2rem;">
+        <a href="{% url 'myapp:home' %}" class="btn">Retour à l'accueil</a>
+        <a href="{% url 'myapp:contact' %}" class="btn">Nous contacter</a>
+    </div>
+</div>
+{% endblock %} 

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }} - WebApp Django{% endblock %}
+
+{% block content %}
+<div class="content">
+    <h1>{{ message }}</h1>
+    
+    <div class="time-display">
+        <h2>🕐 Heure actuelle</h2>
+        <p><strong>Heure :</strong> {{ current_time }}</p>
+        <p><strong>Date :</strong> {{ current_date }}</p>
+    </div>
+
+    <div class="grid">
+        <div class="card">
+            <h2>🚀 Fonctionnalités</h2>
+            <p>Cette webApp Django légère inclut :</p>
+            <ul class="feature-list">
+                <li>Interface moderne et responsive</li>
+                <li>Navigation intuitive</li>
+                <li>Design avec gradients et animations</li>
+                <li>Architecture MVC Django</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>🛠️ Technologies</h2>
+            <p>Technologies utilisées :</p>
+            <ul class="feature-list">
+                <li>Django 4.2.7</li>
+                <li>Python 3.x</li>
+                <li>HTML5 & CSS3</li>
+                <li>SQLite Database</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>📱 Responsive</h2>
+            <p>L'application s'adapte à tous les écrans :</p>
+            <ul class="feature-list">
+                <li>Desktop et tablette</li>
+                <li>Mobile et smartphone</li>
+                <li>Navigation tactile optimisée</li>
+                <li>Design adaptatif</li>
+            </ul>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 2rem;">
+        <a href="{% url 'myapp:about' %}" class="btn">En savoir plus</a>
+        <a href="{% url 'myapp:contact' %}" class="btn">Nous contacter</a>
+    </div>
+</div>
+{% endblock %} 
