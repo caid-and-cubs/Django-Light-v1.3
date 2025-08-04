@@ -1,18 +1,28 @@
-# WebApp Django Légère - Optimisée pour Render.com
+# WebApp Django Légère - Optimisée pour Railway.com
 
-Une application web Django légère et moderne, optimisée pour le déploiement sur Render.com.
+Une application web Django légère et moderne, optimisée pour le déploiement sur Railway.com.
 
-## 🚀 Déploiement rapide sur Render.com
+## 🚀 Déploiement rapide sur Railway.com
 
 ### Option 1 : Déploiement via GitHub
 1. Forkez ce repository
-2. Connectez votre compte GitHub à [Render.com](https://render.com)
-3. Créez un nouveau "Web Service"
-4. Importez le projet depuis GitHub
-5. Déployez en un clic !
+2. Connectez votre compte GitHub à [Railway.com](https://railway.com)
+3. Créez un nouveau projet
+4. Importez le repository depuis GitHub
+5. Ajoutez une base de données PostgreSQL
+6. Déployez en un clic !
 
-### Option 2 : Déploiement via render.yaml
-Le fichier `render.yaml` est déjà configuré pour un déploiement automatique.
+### Option 2 : Déploiement via CLI
+```bash
+# Installer Railway CLI
+npm install -g @railway/cli
+
+# Se connecter à Railway
+railway login
+
+# Déployer
+railway up
+```
 
 ## 🛠️ Développement local
 
@@ -33,8 +43,8 @@ python manage.py runserver
 ├── myproject/            # Configuration Django
 ├── myapp/               # Application principale
 ├── templates/           # Templates HTML
-├── build.sh            # Script de build Render
-├── render.yaml         # Configuration Render
+├── Procfile            # Configuration Railway
+├── railway.json        # Configuration Railway
 └── requirements.txt    # Dépendances Python
 ```
 
@@ -42,17 +52,19 @@ python manage.py runserver
 
 - 🎨 Interface moderne et responsive
 - 📱 Design adaptatif pour tous les écrans
-- ⚡ Optimisé pour Render.com
+- ⚡ Optimisé pour Railway.com
 - 🚀 Déploiement en un clic
 - 🔧 Configuration simplifiée
-- 💾 Base de données persistante
+- 💾 Base de données PostgreSQL
+- 🔒 SSL automatique
 
 ## 🌐 Accès
 
-Une fois déployé, votre application sera accessible à l'adresse fournie par Render.com.
+Une fois déployé, votre application sera accessible à l'adresse fournie par Railway.com.
 
 ## 📝 Notes
 
-- Cette version est optimisée pour Render.com avec base de données persistante
+- Cette version est optimisée pour Railway.com avec PostgreSQL
 - Support complet des sessions et authentification
-- Parfait pour les applications de production 
+- Parfait pour les applications de production
+- Déploiement automatique depuis GitHub 

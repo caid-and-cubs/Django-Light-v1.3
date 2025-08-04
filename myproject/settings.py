@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-c=lso(we4g4vm=m7+m8+mnsuf*f6-1!el2#qx1#*z3ae_hi)1o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['*', '.render.com', '.onrender.com']
+ALLOWED_HOSTS = ['*', '.railway.app', '.up.railway.app']
 
 
 # Application definition
@@ -76,14 +76,23 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# Configuration pour Render.com
+# Configuration pour Railway.com
 import os
+import dj_database_url
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# Configuration Railway - PostgreSQL si disponible
+if os.environ.get('DATABASE_URL'):
+    DATABASES['default'] = dj_database_url.config(
+        default=os.environ.get('DATABASE_URL'),
+        conn_max_age=600
+    )
 
 
 # Password validation
@@ -129,8 +138,8 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Configuration pour Render.com
-if os.environ.get('RENDER'):
-    # Configuration spécifique pour Render
+# Configuration pour Railway.com
+if os.environ.get('RAILWAY'):
+    # Configuration spécifique pour Railway
     SECURE_SSL_REDIRECT = True
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
