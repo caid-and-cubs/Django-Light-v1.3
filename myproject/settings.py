@@ -75,10 +75,11 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# Configuration pour Vercel (pas de base de données persistante)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': ':memory:',  # Base de données en mémoire pour Vercel
     }
 }
 
@@ -124,3 +125,15 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Configuration pour Vercel
+import os
+if os.environ.get('VERCEL'):
+    # Désactiver les migrations automatiques sur Vercel
+    MIGRATION_MODULES = {
+        'django.contrib.auth': None,
+        'django.contrib.contenttypes': None,
+        'django.contrib.sessions': None,
+        'django.contrib.messages': None,
+        'django.contrib.staticfiles': None,
+    }

@@ -18,6 +18,9 @@ from myapp.views import home, about, contact
 # Handler pour Vercel
 def handler(request, context):
     try:
+        # Configuration pour Vercel
+        os.environ.setdefault('VERCEL', 'True')
+        
         # Obtenir le chemin de la requête
         path = request.get('url', '/')
         
