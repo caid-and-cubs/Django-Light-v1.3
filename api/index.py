@@ -9,10 +9,40 @@ sys.path.insert(0, str(project_root))
 # Configuration Django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myproject.settings')
 
-# Import de l'application WSGI
-from django.core.wsgi import get_wsgi_application
-application = get_wsgi_application()
+# Importer Django et les vues
+import django
+django.setup()
+
+from myapp.views import home, about, contact
 
 # Handler pour Vercel
 def handler(request, context):
-    return application(request, context) 
+    try:
+        # Obtenir le chemin de la requête
+        path = request.get('url', '/')
+        
+        # Router vers la bonne vue
+        if path == '/':
+            response = home()
+        elif path == '/about/':
+            response = about()
+        elif path == '/contact/':
+            response = contact()
+        else:
+            # Page 404
+            from django.http import HttpResponse
+            response = HttpResponse('Page not found', status=404)
+        
+        # Retourner la réponse au format Vercel
+        return {
+            'statusCode': response.status_code,
+            'headers': {
+                'Content-Type': 'text/html; charset=utf-8',
+            },
+            'body': response.content.decode('utf-8')
+        }
+    except Exception as e:
+        return {
+            'statusCode': 500,
+            'body': f'Error: {str(e)}'
+        } 
